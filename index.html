@@ -86,99 +86,113 @@
             </div>
         </div>
     </div>
+<script>
+    // --- DATOS DE CONTACTO POR PAÍS ---
+    const socialData = {
+        "Ecuador": { whatsapp: "593998469249", instagram: "promotvecoficial" },
+        "Perú": { whatsapp: "51900000000", instagram: "promotvperu" },
+        "Colombia": { whatsapp: "573000000000", instagram: "promotvcol" },
+        "Bolivia": { whatsapp: "59100000000", instagram: "promotvbo" },
+        "Panamá": { whatsapp: "5070000000", instagram: "promotvpa" },
+        "Argentina": { whatsapp: "540000000000", instagram: "promotvar" },
+        "México": { whatsapp: "520000000000", instagram: "promotvmx" }
+    };
 
-    <script>
-        const socialData = {
-            "Ecuador": { whatsapp: "593998469249", instagram: "promotvecoficial" },
-            "Perú": { whatsapp: "51900000000", instagram: "promotvperu" },
-            "Colombia": { whatsapp: "573000000000", instagram: "promotvcol" },
-            "Bolivia": { whatsapp: "59100000000", instagram: "promotvbo" },
-            "Panamá": { whatsapp: "5070000000", instagram: "promotvpa" },
-            "Argentina": { whatsapp: "540000000000", instagram: "promotvar" },
-            "México": { whatsapp: "520000000000", instagram: "promotvmx" }
-        };
+    // --- CATÁLOGO DE PRODUCTOS ---
+    const catalogosPorPais = {
+        "Ecuador": [
+            { 
+                name: 'Combo MegaHome EC', 
+                category: 'Hogar', 
+                image: 'https://lh3.googleusercontent.com/u/0/d/1tBl1qsE6_x2UuVOJV7XymCjQBXyRWwme', 
+                benefits: ['Acero Quirúrgico 100 piezas', 'Apto para todo tipo de cocina', 'Resistente y duradero'] 
+            },
+            { 
+                name: 'Olla Pro EC', 
+                category: 'Cocina', 
+                image: 'https://lh3.googleusercontent.com/u/0/d/1foaVHCFi-Ff9Z3MalUXkKa1y722nyIRW', 
+                benefits: ['8L de gran capacidad', '3 válvulas de seguridad', 'Cocción ultra rápida'] 
+            }
+        ],
+        // Puedes agregar más productos para otros países aquí siguiendo el mismo formato
+    };
 
-        const catalogosPorPais = {
-            "Ecuador": [
-                { 
-                    name: 'Combo MegaHome EC', 
-                    category: 'Hogar', 
-                    image: 'https://lh3.googleusercontent.com/u/0/d/1tBl1qsE6_x2UuVOJV7XymCjQBXyRWwme', 
-                    benefits: ['Acero Quirúrgico 100 piezas', 'Apto para todo tipo de cocina', 'Resistente y duradero'] 
-                },
-                { 
-                    name: 'Olla Pro EC', 
-                    category: 'Cocina', 
-                    image: 'https://lh3.googleusercontent.com/u/0/d/1foaVHCFi-Ff9Z3MalUXkKa1y722nyIRW', 
-                    benefits: ['8L de gran capacidad', '3 válvulas de seguridad', 'Cocción ultra rápida'] 
-                }
-            ],
-            // Repite la estructura para otros países según necesites
-        };
+    let currentPage = 1;
 
-        let currentPage = 1;
+    function renderAll() {
+        const country = document.getElementById('countrySelect').value;
+        const data = socialData[country] || socialData["Ecuador"];
+        
+        // 1. Renderizar Productos en Página 2
+        const grid = document.getElementById('productsGrid');
+        const productos = catalogosPorPais[country] || catalogosPorPais["Ecuador"];
+        
+        grid.innerHTML = productos.map(p => {
+            const waMessage = encodeURIComponent(`Hola PromoTV ${country}, quiero más información de este producto: ${p.name}`);
+            const waLink = `https://wa.me/${data.whatsapp}?text=${waMessage}`;
 
-        function renderAll() {
-            const country = document.getElementById('countrySelect').value;
-            const data = socialData[country] || socialData["Ecuador"];
-            
-            // Renderizar Productos
-            const grid = document.getElementById('productsGrid');
-            const productos = catalogosPorPais[country] || catalogosPorPais["Ecuador"];
-            
-            grid.innerHTML = productos.map(p => {
-                const waMessage = encodeURIComponent(`Hola PromoTV ${country}, quiero más información de este producto: ${p.name}`);
-                const waLink = `https://wa.me/${data.whatsapp}?text=${waMessage}`;
-
-                return `
-                <div class="flex flex-col gap-4 p-5 rounded-[25px] bg-white border border-gray-100 shadow-sm">
-                    <div class="flex gap-4">
-                        <div class="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 shadow-inner">
-                            <img src="${p.image}" class="w-full h-full object-cover">
-                        </div>
-                        <div class="flex flex-col flex-1">
-                            <span class="text-[10px] font-black text-secondary uppercase tracking-tighter mb-1">${p.category}</span>
-                            <h4 class="font-black text-xl text-primary leading-tight mb-2 uppercase">${p.name}</h4>
-                            <ul class="space-y-1">
-                                ${p.benefits.map(b => `<li class="text-[10px] text-gray-500 flex items-center gap-1 font-medium"><i data-lucide="check-circle-2" class="text-secondary" size="10"></i> ${b}</li>`).join('')}
-                            </ul>
-                        </div>
+            return `
+            <div class="flex flex-col gap-4 p-6 rounded-[30px] bg-white border border-gray-100 shadow-sm">
+                <div class="flex gap-4">
+                    <div class="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 shadow-inner">
+                        <img src="${p.image}" class="w-full h-full object-cover">
                     </div>
-                    <a href="${waLink}" target="_blank" class="w-full py-3 rounded-xl bg-primary text-white text-xs font-bold flex items-center justify-center gap-2 hover:bg-opacity-90 transition-all uppercase tracking-widest">
-                        Pedir <i data-lucide="send" size="12"></i>
+                    <div class="flex flex-col flex-1">
+                        <span class="text-[10px] font-black text-secondary uppercase tracking-tighter mb-1">${p.category}</span>
+                        <h4 class="font-black text-xl text-primary leading-tight mb-2 uppercase">${p.name}</h4>
+                        <ul class="space-y-1">
+                            ${p.benefits.map(b => `
+                                <li class="text-[11px] text-gray-500 flex items-center gap-2 font-medium">
+                                    <i data-lucide="check-circle-2" class="text-secondary" size="12"></i> ${b}
+                                </li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="flex justify-center mt-2">
+                    <a href="${waLink}" target="_blank" 
+                       class="w-64 py-4 rounded-full bg-primary text-white text-lg font-black flex items-center justify-center gap-3 hover:scale-105 transition-transform uppercase tracking-widest shadow-lg">
+                        Pedir <i data-lucide="send" size="22"></i>
                     </a>
                 </div>
-                `;
-            }).join('');
-
-            // Actualizar Página 3
-            document.getElementById('contactCountryText').innerText = `Atención inmediata para ${country}`;
-            const container = document.getElementById('socialLinksContainer');
-            container.innerHTML = `
-                <a href="https://wa.me/${data.whatsapp}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-gray-100">
-                    <div class="flex items-center gap-4"><div class="p-2 bg-green-100 rounded-xl"><i data-lucide="phone" class="text-green-600" size="18"></i></div><span class="font-bold text-gray-700">WhatsApp Ventas</span></div>
-                    <i data-lucide="chevron-right" size="16" class="text-gray-400"></i>
-                </a>
+            </div>
             `;
-            
-            lucide.createIcons();
-        }
+        }).join('');
 
-        function updateUI() {
-            document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active-page', (i+1) === currentPage));
-            document.getElementById('pageIndicator').innerText = `Página ${currentPage} de 3`;
-            document.getElementById('catalogContainer').scrollTo({top: 0, behavior: 'smooth'});
-        }
+        // 2. Actualizar Página 3 (Contacto)
+        document.getElementById('contactCountryText').innerText = `Atención inmediata para ${country}`;
+        const container = document.getElementById('socialLinksContainer');
+        container.innerHTML = `
+            <a href="https://wa.me/${data.whatsapp}" target="_blank" class="flex items-center justify-between p-5 rounded-2xl bg-gray-50 border border-gray-100">
+                <div class="flex items-center gap-4">
+                    <div class="p-2 bg-green-100 rounded-xl">
+                        <i data-lucide="phone" class="text-green-600" size="20"></i>
+                    </div>
+                    <span class="font-bold text-gray-700">WhatsApp Ventas</span>
+                </div>
+                <i data-lucide="chevron-right" size="18" class="text-gray-400"></i>
+            </a>
+        `;
+        
+        lucide.createIcons();
+    }
 
-        function nextPage() { if(currentPage < 3) { currentPage++; updateUI(); } }
-        function prevPage() { if(currentPage > 1) { currentPage--; updateUI(); } }
+    // Funciones de Navegación
+    function updateUI() {
+        document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active-page', (i+1) === currentPage));
+        document.getElementById('pageIndicator').innerText = `Página ${currentPage} de 3`;
+        document.getElementById('catalogContainer').scrollTo({top: 0, behavior: 'smooth'});
+    }
 
-        document.getElementById('countrySelect').addEventListener('change', (e) => {
-            document.getElementById('selectedCountryLabel').innerText = `Selección del mes en ${e.target.value}`;
-            renderAll();
-        });
+    function nextPage() { if(currentPage < 3) { currentPage++; updateUI(); } }
+    function prevPage() { if(currentPage > 1) { currentPage--; updateUI(); } }
 
-        window.onload = () => { renderAll(); lucide.createIcons(); };
-    </script>
+    document.getElementById('countrySelect').addEventListener('change', (e) => {
+        document.getElementById('selectedCountryLabel').innerText = `Selección del mes en ${e.target.value}`;
+        renderAll();
+    });
+
+    window.onload = () => { renderAll(); lucide.createIcons(); };
+</script>
 </body>
 </html>
