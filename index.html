@@ -3,40 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo PromoTV - Internacional</title>
+    <title>Catálogo PromoTV - Características</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         body { font-family: 'Poppins', sans-serif; background-color: #f3f4f6; }
-        .page-container { 
-            width: min(95vw, 450px); 
-            height: min(150vw, 750px); 
-            border-radius: 30px; 
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); 
-            overflow: hidden; 
-            position: relative; 
-            background: white; 
-        }
+        .page-container { width: min(95vw, 450px); height: min(150vw, 750px); border-radius: 30px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); overflow: hidden; position: relative; background: white; }
         .page { display: none; height: 100%; flex-direction: column; }
         .active-page { display: flex; }
         .bg-primary { background-color: #0f2f76; }
         .text-primary { color: #0f2f76; }
         .bg-secondary { background-color: #feac1f; }
         .text-secondary { color: #feac1f; }
-        .border-secondary { border-color: #feac1f; }
     </style>
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen py-8">
 
     <div class="fixed bottom-6 z-50 flex items-center gap-4 bg-white p-3 rounded-full shadow-2xl border border-gray-100">
-        <button onclick="prevPage()" class="p-2 rounded-full hover:bg-gray-100 transition text-primary">
-            <i data-lucide="chevron-left"></i>
-        </button>
+        <button onclick="prevPage()" class="p-2 rounded-full hover:bg-gray-100 text-primary"><i data-lucide="chevron-left"></i></button>
         <span id="pageIndicator" class="font-bold text-sm text-primary px-2">Página 1 de 3</span>
-        <button onclick="nextPage()" class="p-2 rounded-full hover:bg-gray-100 transition text-primary">
-            <i data-lucide="chevron-right"></i>
-        </button>
+        <button onclick="nextPage()" class="p-2 rounded-full hover:bg-gray-100 text-primary"><i data-lucide="chevron-right"></i></button>
     </div>
 
     <div class="page-container" id="catalogContainer">
@@ -45,174 +32,131 @@
             <div class="h-2/5 relative flex items-center justify-center overflow-hidden">
                 <img src="https://lh3.googleusercontent.com/u/0/d/1Xp7C0V4Ksi8R3nv1n2vMI-xyhuaK4M_7" alt="Fondo" class="absolute inset-0 w-full h-full object-cover">
                 <div class="absolute inset-0 bg-[#0f2f76]/90 mix-blend-multiply"></div>
-
                 <div class="z-10 text-center">
                     <div class="bg-white p-4 rounded-3xl shadow-lg transform -rotate-3 flex items-center justify-center">
                         <img src="https://lh3.googleusercontent.com/u/0/d/1HChOqAbmrJrIhgbDm6j4VfwdrDOAsdk1" alt="Logo" class="h-16 w-auto object-contain">
                     </div>
                 </div>
             </div>
-
             <div class="flex-1 flex flex-col justify-center px-10 bg-white">
-                <h2 class="text-4xl font-bold leading-tight mb-4 text-black">CATÁLOGO DE <br><span class="text-primary uppercase">Productos</span></h2>
+                <h2 class="text-4xl font-bold leading-tight mb-4 text-black uppercase">Catálogo de <br><span class="text-primary">Productos</span></h2>
                 <div class="w-16 h-2 mb-6 bg-secondary"></div>
-                <p class="text-gray-600 text-sm mb-10">Descubre nuestra selección exclusiva con envíos garantizados.</p>
-
                 <div class="flex flex-col gap-2">
-                    <span class="text-[10px] uppercase tracking-widest font-bold text-gray-400">¿En qué país te encuentras?:</span>
-                    <div class="relative">
-                        <select id="countrySelect" class="w-full bg-gray-100 p-4 rounded-2xl font-bold appearance-none border-none outline-none cursor-pointer text-primary">
-                            <option value="Ecuador">ECUADOR</option>
-                            <option value="Perú">PERÚ</option>
-                            <option value="Colombia">COLOMBIA</option>
-                            <option value="Bolivia">BOLIVIA</option>
-                            <option value="Panamá">PANAMÁ</option>
-                            <option value="Argentina">ARGENTINA</option>
-                            <option value="México">MÉXICO</option>
-                        </select>
-                        <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-primary">
-                            <i data-lucide="chevron-down" size="18"></i>
-                        </div>
-                    </div>
+                    <span class="text-[10px] uppercase font-bold text-gray-400 italic">Selecciona tu país:</span>
+                    <select id="countrySelect" class="w-full bg-gray-100 p-4 rounded-2xl font-bold text-primary appearance-none outline-none cursor-pointer">
+                        <option value="Ecuador">ECUADOR</option>
+                        <option value="Perú">PERÚ</option>
+                        <option value="Colombia">COLOMBIA</option>
+                        <option value="Bolivia">BOLIVIA</option>
+                        <option value="Panamá">PANAMÁ</option>
+                        <option value="Argentina">ARGENTINA</option>
+                        <option value="México">MÉXICO</option>
+                    </select>
                 </div>
             </div>
-            <div class="h-12 w-full flex items-center justify-center font-bold text-xs bg-secondary text-primary">EDICIÓN EXCLUSIVA 2026</div>
+            <div class="h-12 w-full flex items-center justify-center font-bold text-xs bg-secondary text-primary uppercase">Edición Exclusiva 2026</div>
         </div>
 
         <div id="page2" class="page p-6 overflow-y-auto">
             <div class="flex justify-between items-center mb-6">
                 <div>
                     <h3 class="text-2xl font-bold text-primary">Tendencias</h3>
-                    <p id="selectedCountryLabel" class="text-xs text-gray-500">Selección del mes en Ecuador</p>
+                    <p id="selectedCountryLabel" class="text-xs text-gray-500 italic">Selección del mes en Ecuador</p>
                 </div>
                 <i data-lucide="layout-grid" class="text-secondary"></i>
             </div>
-            <div class="grid grid-cols-1 gap-5" id="productsGrid"></div>
-            <div class="mt-8 p-4 rounded-3xl text-center bg-primary mb-4 text-white text-xs">Paga al recibir en casa</div>
+            <div class="grid grid-cols-1 gap-6" id="productsGrid"></div>
+            <div class="mt-8 p-4 rounded-3xl text-center bg-primary mb-4 text-white text-xs font-bold uppercase tracking-wide">Paga al recibir en casa</div>
         </div>
 
-        <div id="page3" class="page">
+        <div id="page3" class="page flex flex-col">
             <div class="flex-1 flex flex-col items-center justify-center px-10 text-center">
                 <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6 bg-secondary text-primary">
                     <i data-lucide="message-circle" size="32"></i>
                 </div>
                 <h3 class="text-3xl font-bold mb-2 text-primary">¡Contáctanos!</h3>
-                <p id="contactCountryText" class="text-gray-500 text-sm mb-8">Estamos listos para atenderte en Ecuador</p>
-
-                <div id="socialLinksContainer" class="w-full space-y-4">
-                    </div>
+                <p id="contactCountryText" class="text-gray-500 text-sm mb-8 italic">Atención inmediata para Ecuador</p>
+                <div id="socialLinksContainer" class="w-full space-y-4"></div>
             </div>
-
             <div class="p-8 flex flex-col items-center bg-primary">
                 <div class="bg-white px-4 py-2 rounded-xl mb-4">
                     <img src="https://lh3.googleusercontent.com/u/0/d/1HChOqAbmrJrIhgbDm6j4VfwdrDOAsdk1" alt="Logo" class="h-8 w-auto">
                 </div>
-                <p class="text-white text-[10px] opacity-70 italic">© 2026 PromoTV Corp. Todos los derechos reservados.</p>
+                <p class="text-white text-[10px] opacity-70">© 2026 PromoTV Corp. Todos los derechos reservados.</p>
             </div>
         </div>
     </div>
 
     <script>
-        // --- SECCIÓN PARA AGREGAR REDES Y TELÉFONOS POR PAÍS ---
         const socialData = {
-            "Ecuador": {
-                whatsapp: "593998469249",
-                instagram: "promotvecoficial",
-                facebook: "promotvecoficial",
-                web: "www.promotvcorp.com"
-            },
-            "Perú": {
-                whatsapp: "51900000000",
-                instagram: "promotvperu",
-                facebook: "promotvperu",
-                web: "pe.promotvcorp.com"
-            },
-            "Colombia": {
-                whatsapp: "573000000000",
-                instagram: "promotvcol",
-                facebook: "promotvcol",
-                web: "co.promotvcorp.com"
-            },
-            "Bolivia": {
-                whatsapp: "59100000000",
-                instagram: "promotvbo",
-                facebook: "promotvbo",
-                web: "bo.promotvcorp.com"
-            },
-            "Panamá": {
-                whatsapp: "5070000000",
-                instagram: "promotvpa",
-                facebook: "promotvpa",
-                web: "pa.promotvcorp.com"
-            },
-            "Argentina": {
-                whatsapp: "540000000000",
-                instagram: "promotvar",
-                facebook: "promotvar",
-                web: "ar.promotvcorp.com"
-            },
-            "México": {
-                whatsapp: "520000000000",
-                instagram: "promotvmx",
-                facebook: "promotvmx",
-                web: "mx.promotvcorp.com"
-            }
+            "Ecuador": { whatsapp: "593998469249", instagram: "promotvecoficial" },
+            "Perú": { whatsapp: "51900000000", instagram: "promotvperu" },
+            "Colombia": { whatsapp: "573000000000", instagram: "promotvcol" },
+            "Bolivia": { whatsapp: "59100000000", instagram: "promotvbo" },
+            "Panamá": { whatsapp: "5070000000", instagram: "promotvpa" },
+            "Argentina": { whatsapp: "540000000000", instagram: "promotvar" },
+            "México": { whatsapp: "520000000000", instagram: "promotvmx" }
         };
 
-        // --- SECCIÓN DE PRODUCTOS POR PAÍS ---
         const catalogosPorPais = {
             "Ecuador": [
-                { name: 'Combo MegaHome EC', category: 'Hogar', price: '$299.99', image: 'https://lh3.googleusercontent.com/u/0/d/1tBl1qsE6_x2UuVOJV7XymCjQBXyRWwme', description: '¡Envío a todo el país!' },
-                { name: 'Olla Pro EC', category: 'Cocina', price: '$149.99', image: 'https://lh3.googleusercontent.com/u/0/d/1foaVHCFi-Ff9Z3MalUXkKa1y722nyIRW', description: 'Pago contra entrega.' }
+                { 
+                    name: 'Combo MegaHome EC', 
+                    category: 'Hogar', 
+                    image: 'https://lh3.googleusercontent.com/u/0/d/1tBl1qsE6_x2UuVOJV7XymCjQBXyRWwme', 
+                    benefits: ['Acero Quirúrgico 100 piezas', 'Apto para todo tipo de cocina', 'Resistente y duradero'] 
+                },
+                { 
+                    name: 'Olla Pro EC', 
+                    category: 'Cocina', 
+                    image: 'https://lh3.googleusercontent.com/u/0/d/1foaVHCFi-Ff9Z3MalUXkKa1y722nyIRW', 
+                    benefits: ['8L de gran capacidad', '3 válvulas de seguridad', 'Cocción ultra rápida'] 
+                }
             ],
-            "Perú": [
-                { name: 'Combo MegaHome PE', category: 'Hogar', price: 'S/ 1150', image: 'https://lh3.googleusercontent.com/u/0/d/1tBl1qsE6_x2UuVOJV7XymCjQBXyRWwme', description: 'Entrega nacional garantizada.' }
-            ],
-            // Agrega aquí los demás países...
+            // Repite la estructura para otros países según necesites
         };
 
         let currentPage = 1;
 
         function renderAll() {
             const country = document.getElementById('countrySelect').value;
+            const data = socialData[country] || socialData["Ecuador"];
             
-            // 1. Renderizar Productos
+            // Renderizar Productos
             const grid = document.getElementById('productsGrid');
             const productos = catalogosPorPais[country] || catalogosPorPais["Ecuador"];
-            grid.innerHTML = productos.map(p => `
-                <div class="flex gap-4 p-3 rounded-[20px] bg-gray-50 border border-gray-100">
-                    <div class="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0"><img src="${p.image}" class="w-full h-full object-cover"></div>
-                    <div class="flex flex-col justify-center flex-1">
-                        <span class="text-[8px] font-bold text-secondary uppercase">${p.category}</span>
-                        <h4 class="font-bold text-sm text-black leading-tight">${p.name}</h4>
-                        <div class="flex justify-between items-center mt-1">
-                            <span class="font-bold text-primary">${p.price}</span>
-                            <button class="px-3 py-1 rounded-full text-[8px] font-bold text-white bg-primary uppercase">Pedir</button>
+            
+            grid.innerHTML = productos.map(p => {
+                const waMessage = encodeURIComponent(`Hola PromoTV ${country}, quiero más información de este producto: ${p.name}`);
+                const waLink = `https://wa.me/${data.whatsapp}?text=${waMessage}`;
+
+                return `
+                <div class="flex flex-col gap-4 p-5 rounded-[25px] bg-white border border-gray-100 shadow-sm">
+                    <div class="flex gap-4">
+                        <div class="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 shadow-inner">
+                            <img src="${p.image}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex flex-col flex-1">
+                            <span class="text-[10px] font-black text-secondary uppercase tracking-tighter mb-1">${p.category}</span>
+                            <h4 class="font-black text-xl text-primary leading-tight mb-2 uppercase">${p.name}</h4>
+                            <ul class="space-y-1">
+                                ${p.benefits.map(b => `<li class="text-[10px] text-gray-500 flex items-center gap-1 font-medium"><i data-lucide="check-circle-2" class="text-secondary" size="10"></i> ${b}</li>`).join('')}
+                            </ul>
                         </div>
                     </div>
+                    <a href="${waLink}" target="_blank" class="w-full py-3 rounded-xl bg-primary text-white text-xs font-bold flex items-center justify-center gap-2 hover:bg-opacity-90 transition-all uppercase tracking-widest">
+                        Pedir <i data-lucide="send" size="12"></i>
+                    </a>
                 </div>
-            `).join('');
+                `;
+            }).join('');
 
-            // 2. Renderizar Redes Sociales Dinámicas
-            const data = socialData[country] || socialData["Ecuador"];
-            document.getElementById('contactCountryText').innerText = `Estamos listos para atenderte en ${country}`;
-            
+            // Actualizar Página 3
+            document.getElementById('contactCountryText').innerText = `Atención inmediata para ${country}`;
             const container = document.getElementById('socialLinksContainer');
             container.innerHTML = `
                 <a href="https://wa.me/${data.whatsapp}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-gray-100">
                     <div class="flex items-center gap-4"><div class="p-2 bg-green-100 rounded-xl"><i data-lucide="phone" class="text-green-600" size="18"></i></div><span class="font-bold text-gray-700">WhatsApp Ventas</span></div>
-                    <i data-lucide="chevron-right" size="16" class="text-gray-400"></i>
-                </a>
-                <a href="https://instagram.com/${data.instagram}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-gray-100">
-                    <div class="flex items-center gap-4"><div class="p-2 bg-pink-100 rounded-xl"><i data-lucide="instagram" class="text-pink-600" size="18"></i></div><span class="font-bold text-gray-700">@${data.instagram}</span></div>
-                    <i data-lucide="chevron-right" size="16" class="text-gray-400"></i>
-                </a>
-                <a href="https://facebook.com/${data.facebook}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-gray-100">
-                    <div class="flex items-center gap-4"><div class="p-2 bg-blue-100 rounded-xl"><i data-lucide="facebook" class="text-blue-600" size="18"></i></div><span class="font-bold text-gray-700">Facebook</span></div>
-                    <i data-lucide="chevron-right" size="16" class="text-gray-400"></i>
-                </a>
-                <a href="https://${data.web}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-gray-100">
-                    <div class="flex items-center gap-4"><div class="p-2 bg-gray-200 rounded-xl"><i data-lucide="globe" class="text-gray-600" size="18"></i></div><span class="font-bold text-gray-700">Sitio Web</span></div>
                     <i data-lucide="chevron-right" size="16" class="text-gray-400"></i>
                 </a>
             `;
@@ -223,7 +167,7 @@
         function updateUI() {
             document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active-page', (i+1) === currentPage));
             document.getElementById('pageIndicator').innerText = `Página ${currentPage} de 3`;
-            document.getElementById('catalogContainer').scrollTo({top: 0});
+            document.getElementById('catalogContainer').scrollTo({top: 0, behavior: 'smooth'});
         }
 
         function nextPage() { if(currentPage < 3) { currentPage++; updateUI(); } }
