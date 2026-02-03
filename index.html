@@ -87,18 +87,53 @@
         </div>
     </div>
 <script>
-    // --- DATOS DE CONTACTO POR PAÍS ---
+    // --- DATOS COMPLETOS POR PAÍS (Configura aquí tus redes) ---
     const socialData = {
-        "Ecuador": { whatsapp: "593998469249", instagram: "promotvecoficial" },
-        "Perú": { whatsapp: "51900000000", instagram: "promotvperu" },
-        "Colombia": { whatsapp: "573000000000", instagram: "promotvcol" },
-        "Bolivia": { whatsapp: "59100000000", instagram: "promotvbo" },
-        "Panamá": { whatsapp: "5070000000", instagram: "promotvpa" },
-        "Argentina": { whatsapp: "540000000000", instagram: "promotvar" },
-        "México": { whatsapp: "520000000000", instagram: "promotvmx" }
+        "Ecuador": { 
+            whatsapp: "593998469249", 
+            instagram: "promotvecoficial",
+            facebook: "promotvecoficial", // Nombre de la página
+            web: "www.promotvcorp.com"
+        },
+        "Perú": { 
+            whatsapp: "51900000000", 
+            instagram: "promotvperu",
+            facebook: "promotvperu",
+            web: "pe.promotvcorp.com"
+        },
+        "Colombia": { 
+            whatsapp: "573000000000", 
+            instagram: "promotvcol",
+            facebook: "promotvcol",
+            web: "co.promotvcorp.com"
+        },
+        "Bolivia": { 
+            whatsapp: "59100000000", 
+            instagram: "promotvbo",
+            facebook: "promotvbo",
+            web: "bo.promotvcorp.com"
+        },
+        "Panamá": { 
+            whatsapp: "5070000000", 
+            instagram: "promotvpa",
+            facebook: "promotvpa",
+            web: "pa.promotvcorp.com"
+        },
+        "Argentina": { 
+            whatsapp: "540000000000", 
+            instagram: "promotvar",
+            facebook: "promotvar",
+            web: "ar.promotvcorp.com"
+        },
+        "México": { 
+            whatsapp: "520000000000", 
+            instagram: "promotvmx",
+            facebook: "promotvmx",
+            web: "mx.promotvcorp.com"
+        }
     };
 
-    // --- CATÁLOGO DE PRODUCTOS ---
+    // --- CATÁLOGO DE PRODUCTOS (Mantener igual) ---
     const catalogosPorPais = {
         "Ecuador": [
             { 
@@ -113,8 +148,7 @@
                 image: 'https://lh3.googleusercontent.com/u/0/d/1foaVHCFi-Ff9Z3MalUXkKa1y722nyIRW', 
                 benefits: ['8L de gran capacidad', '3 válvulas de seguridad', 'Cocción ultra rápida'] 
             }
-        ],
-        // Puedes agregar más productos para otros países aquí siguiendo el mismo formato
+        ]
     };
 
     let currentPage = 1;
@@ -123,7 +157,7 @@
         const country = document.getElementById('countrySelect').value;
         const data = socialData[country] || socialData["Ecuador"];
         
-        // 1. Renderizar Productos en Página 2
+        // 1. Renderizar Productos (Página 2)
         const grid = document.getElementById('productsGrid');
         const productos = catalogosPorPais[country] || catalogosPorPais["Ecuador"];
         
@@ -134,24 +168,19 @@
             return `
             <div class="flex flex-col gap-4 p-6 rounded-[30px] bg-white border border-gray-100 shadow-sm">
                 <div class="flex gap-4">
-                    <div class="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 shadow-inner">
+                    <div class="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0">
                         <img src="${p.image}" class="w-full h-full object-cover">
                     </div>
                     <div class="flex flex-col flex-1">
                         <span class="text-[10px] font-black text-secondary uppercase tracking-tighter mb-1">${p.category}</span>
                         <h4 class="font-black text-xl text-primary leading-tight mb-2 uppercase">${p.name}</h4>
                         <ul class="space-y-1">
-                            ${p.benefits.map(b => `
-                                <li class="text-[11px] text-gray-500 flex items-center gap-2 font-medium">
-                                    <i data-lucide="check-circle-2" class="text-secondary" size="12"></i> ${b}
-                                </li>`).join('')}
+                            ${p.benefits.map(b => `<li class="text-[11px] text-gray-500 flex items-center gap-2 font-medium"><i data-lucide="check-circle-2" class="text-secondary" size="12"></i> ${b}</li>`).join('')}
                         </ul>
                     </div>
                 </div>
-
                 <div class="flex justify-center mt-2">
-                    <a href="${waLink}" target="_blank" 
-                       class="w-64 py-4 rounded-full bg-primary text-white text-lg font-black flex items-center justify-center gap-3 hover:scale-105 transition-transform uppercase tracking-widest shadow-lg">
+                    <a href="${waLink}" target="_blank" class="w-64 py-4 rounded-full bg-primary text-white text-lg font-black flex items-center justify-center gap-3 hover:scale-105 transition-transform uppercase tracking-widest shadow-lg">
                         Pedir <i data-lucide="send" size="22"></i>
                     </a>
                 </div>
@@ -159,25 +188,48 @@
             `;
         }).join('');
 
-        // 2. Actualizar Página 3 (Contacto)
-        document.getElementById('contactCountryText').innerText = `Atención inmediata para ${country}`;
+        // 2. Renderizar PÁGINA DE CONTACTO COMPLETA (Página 3)
+        document.getElementById('contactCountryText').innerText = `Estamos listos para procesar tu pedido en ${country}`;
         const container = document.getElementById('socialLinksContainer');
+        
+        // Aquí generamos todos los botones como en la imagen que subiste
         container.innerHTML = `
-            <a href="https://wa.me/${data.whatsapp}" target="_blank" class="flex items-center justify-between p-5 rounded-2xl bg-gray-50 border border-gray-100">
+            <a href="https://wa.me/${data.whatsapp}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 hover:bg-gray-100 transition border border-transparent hover:border-gray-200">
                 <div class="flex items-center gap-4">
-                    <div class="p-2 bg-green-100 rounded-xl">
-                        <i data-lucide="phone" class="text-green-600" size="20"></i>
-                    </div>
+                    <div class="p-2 bg-green-100 rounded-xl"><i data-lucide="phone" class="text-green-600" size="20"></i></div>
                     <span class="font-bold text-gray-700">WhatsApp Ventas</span>
+                </div>
+                <i data-lucide="chevron-right" size="18" class="text-gray-400"></i>
+            </a>
+
+            <a href="https://www.instagram.com/${data.instagram}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 hover:bg-gray-100 transition border border-transparent hover:border-gray-200">
+                <div class="flex items-center gap-4">
+                    <div class="p-2 bg-pink-100 rounded-xl"><i data-lucide="instagram" class="text-pink-600" size="20"></i></div>
+                    <span class="font-bold text-gray-700">@${data.instagram}</span>
+                </div>
+                <i data-lucide="chevron-right" size="18" class="text-gray-400"></i>
+            </a>
+
+            <a href="https://www.facebook.com/${data.facebook}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 hover:bg-gray-100 transition border border-transparent hover:border-gray-200">
+                <div class="flex items-center gap-4">
+                    <div class="p-2 bg-blue-100 rounded-xl"><i data-lucide="facebook" class="text-blue-600" size="20"></i></div>
+                    <span class="font-bold text-gray-700">PromoTV ${country}</span>
+                </div>
+                <i data-lucide="chevron-right" size="18" class="text-gray-400"></i>
+            </a>
+
+            <a href="https://${data.web}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 hover:bg-gray-100 transition border border-transparent hover:border-gray-200">
+                <div class="flex items-center gap-4">
+                    <div class="p-2 bg-gray-200 rounded-xl"><i data-lucide="globe" class="text-gray-700" size="20"></i></div>
+                    <span class="font-bold text-gray-700">Nuestro Sitio Web</span>
                 </div>
                 <i data-lucide="chevron-right" size="18" class="text-gray-400"></i>
             </a>
         `;
         
-        lucide.createIcons();
+        lucide.createIcons(); // Vital para que se vean los iconos nuevos
     }
 
-    // Funciones de Navegación
     function updateUI() {
         document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active-page', (i+1) === currentPage));
         document.getElementById('pageIndicator').innerText = `Página ${currentPage} de 3`;
