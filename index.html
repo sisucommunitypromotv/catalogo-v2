@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo PromoTV - Características</title>
+    <title>Catálogo PromoTV - Internacional</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -21,9 +21,13 @@
 <body class="flex flex-col items-center justify-center min-h-screen py-8">
 
     <div class="fixed bottom-6 z-50 flex items-center gap-4 bg-white p-3 rounded-full shadow-2xl border border-gray-100">
-        <button onclick="prevPage()" class="p-2 rounded-full hover:bg-gray-100 text-primary"><i data-lucide="chevron-left"></i></button>
+        <button onclick="prevPage()" class="p-2 rounded-full hover:bg-gray-100 text-primary">
+            <i data-lucide="chevron-left"></i>
+        </button>
         <span id="pageIndicator" class="font-bold text-sm text-primary px-2">Página 1 de 3</span>
-        <button onclick="nextPage()" class="p-2 rounded-full hover:bg-gray-100 text-primary"><i data-lucide="chevron-right"></i></button>
+        <button onclick="nextPage()" class="p-2 rounded-full hover:bg-gray-100 text-primary">
+            <i data-lucide="chevron-right"></i>
+        </button>
     </div>
 
     <div class="page-container" id="catalogContainer">
@@ -39,11 +43,12 @@
                 </div>
             </div>
             <div class="flex-1 flex flex-col justify-center px-10 bg-white">
-                <div id="countryProfileContainer" class="mb-4 h-14 flex items-center">
-                    <img id="countryProfileImg" src="" alt="Perfil País" class="h-full w-auto object-contain hidden">
+                
+                <div id="countryLogoContainer" class="mb-4 h-14 flex items-start">
+                    <img id="countryProfileImg" src="" alt="Perfil" class="h-full w-auto object-contain hidden">
                 </div>
 
-                <h2 class="text-4xl font-bold leading-tight mb-4 text-black uppercase">Catálogo de <br><span class="text-primary">Productasos</span></h2>
+                <h2 class="text-4xl font-bold leading-tight mb-4 text-black uppercase tracking-tight">Catálogo de <br><span class="text-primary">Productos</span></h2>
                 <div class="w-16 h-2 mb-6 bg-secondary"></div>
                 <div class="flex flex-col gap-2">
                     <span class="text-[10px] uppercase font-bold text-gray-400 italic">Selecciona tu país:</span>
@@ -78,7 +83,7 @@
                 <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6 bg-secondary text-primary">
                     <i data-lucide="message-circle" size="32"></i>
                 </div>
-                <h3 class="text-3xl font-bold mb-2 text-primary">¡Contáctanos!</h3>
+                <h3 class="text-3xl font-bold mb-2 text-primary uppercase">¡Contáctanos!</h3>
                 <p id="contactCountryText" class="text-gray-500 text-sm mb-8 italic">Atención inmediata para Ecuador</p>
                 <div id="socialLinksContainer" class="w-full space-y-4"></div>
             </div>
@@ -92,15 +97,15 @@
     </div>
 
 <script>
-    // --- NUEVO: CONFIGURA AQUÍ LAS IMÁGENES PNG DE CADA PAÍS ---
+    // --- 1. CONFIGURACIÓN DE LOGOS POR PAÍS ---
     const logosPorPais = {
-        "Ecuador": "URL_IMAGEN_ECUADOR.png",
-        "Perú": "URL_IMAGEN_PERU.png",
-        "Colombia": "URL_IMAGEN_COLOMBIA.png",
-        "Bolivia": "URL_IMAGEN_BOLIVIA.png",
-        "Panamá": "URL_IMAGEN_PANAMA.png",
-        "Argentina": "URL_IMAGEN_ARGENTINA.png",
-        "México": "URL_IMAGEN_MEXICO.png"
+        "Ecuador": "PON_AQUÍ_LINK_PNG_ECUADOR",
+        "Perú": "PON_AQUÍ_LINK_PNG_PERU",
+        "Colombia": "PON_AQUÍ_LINK_PNG_COLOMBIA",
+        "Bolivia": "PON_AQUÍ_LINK_PNG_BOLIVIA",
+        "Panamá": "PON_AQUÍ_LINK_PNG_PANAMA",
+        "Argentina": "PON_AQUÍ_LINK_PNG_ARGENTINA",
+        "México": "PON_AQUÍ_LINK_PNG_MEXICO"
     };
 
     const socialData = {
@@ -136,23 +141,21 @@
         const country = document.getElementById('countrySelect').value;
         const data = socialData[country] || socialData["Ecuador"];
         
-        // ACTUALIZAR IMAGEN DE PERFIL POR PAÍS
+        // --- LOGO DINÁMICO ---
         const profileImg = document.getElementById('countryProfileImg');
-        if(logosPorPais[country] && logosPorPais[country] !== "URL_IMAGEN_ECUADOR.png") {
+        if(logosPorPais[country] && logosPorPais[country].startsWith('http')) {
             profileImg.src = logosPorPais[country];
             profileImg.classList.remove('hidden');
         } else {
             profileImg.classList.add('hidden');
         }
 
-        // 1. Renderizar Productos (Página 2)
+        // --- PRODUCTOS ---
         const grid = document.getElementById('productsGrid');
         const productos = catalogosPorPais[country] || catalogosPorPais["Ecuador"];
         
         grid.innerHTML = productos.map(p => {
-            const waMessage = encodeURIComponent(`Hola PromoTV ${country}, quiero más información de este producto: ${p.name}`);
-            const waLink = `https://wa.me/${data.whatsapp}?text=${waMessage}`;
-
+            const waLink = `https://wa.me/${data.whatsapp}?text=Hola, quiero info de: ${p.name}`;
             return `
             <div class="flex flex-col gap-4 p-6 rounded-[30px] bg-white border border-gray-100 shadow-sm">
                 <div class="flex gap-4">
@@ -160,52 +163,34 @@
                         <img src="${p.image}" class="w-full h-full object-cover">
                     </div>
                     <div class="flex flex-col flex-1">
-                        <span class="text-[15px] font-bold text-secondary uppercase tracking-wide mb-1">${p.category}</span>
+                        <span class="text-[10px] font-bold text-secondary uppercase tracking-widest mb-1">${p.category}</span>
                         <h4 class="font-bold text-xl text-primary leading-tight mb-2 uppercase">${p.name}</h4>
                         <ul class="space-y-1">
-                            ${p.benefits.map(b => `<li class="text-[13px] text-gray-500 flex items-center gap-2 font-medium"><i data-lucide="check-circle-2" class="text-secondary" size="12"></i> ${b}</li>`).join('')}
+                            ${p.benefits.map(b => `<li class="text-[11px] text-gray-500 flex items-center gap-2 font-medium"><i data-lucide="check-circle-2" class="text-secondary" size="12"></i> ${b}</li>`).join('')}
                         </ul>
                     </div>
                 </div>
                 <div class="flex justify-center mt-2">
-                    <a href="${waLink}" target="_blank" class="w-64 py-1 rounded-full bg-primary text-white text-lg font-bold flex items-center justify-center gap-3 hover:scale-105 transition-transform uppercase tracking-widest shadow-lg">
-                        Pedir <i data-lucide="send" size="15"></i>
+                    <a href="${waLink}" target="_blank" class="w-48 py-2 rounded-full bg-primary text-white text-base font-bold flex items-center justify-center gap-2 uppercase tracking-widest shadow-lg">
+                        Pedir <i data-lucide="send" size="16"></i>
                     </a>
                 </div>
-            </div>
-            `;
+            </div>`;
         }).join('');
 
-        // 2. Renderizar Página de Contacto (Página 3)
-        document.getElementById('contactCountryText').innerText = `Estamos listos para procesar tu pedido en ${country}`;
-        const container = document.getElementById('socialLinksContainer');
-        container.innerHTML = `
-            <a href="https://wa.me/${data.whatsapp}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 hover:bg-gray-100 transition border border-transparent hover:border-gray-200">
-                <div class="flex items-center gap-4">
-                    <div class="p-2 bg-green-100 rounded-xl"><i data-lucide="phone" class="text-green-600" size="20"></i></div>
-                    <span class="font-bold text-gray-700">WhatsApp Ventas</span>
-                </div>
+        // --- CONTACTO ---
+        document.getElementById('contactCountryText').innerText = `Atención inmediata para ${country}`;
+        document.getElementById('socialLinksContainer').innerHTML = `
+            <a href="https://wa.me/${data.whatsapp}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-transparent hover:border-gray-200 transition">
+                <div class="flex items-center gap-4"><div class="p-2 bg-green-100 rounded-xl"><i data-lucide="phone" class="text-green-600"></i></div><span class="font-bold text-gray-700">WhatsApp Ventas</span></div>
                 <i data-lucide="chevron-right" size="18" class="text-gray-400"></i>
             </a>
-            <a href="https://www.instagram.com/${data.instagram}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 hover:bg-gray-100 transition border border-transparent hover:border-gray-200">
-                <div class="flex items-center gap-4">
-                    <div class="p-2 bg-pink-100 rounded-xl"><i data-lucide="instagram" class="text-pink-600" size="20"></i></div>
-                    <span class="font-bold text-gray-700">@${data.instagram}</span>
-                </div>
+            <a href="https://instagram.com/${data.instagram}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-transparent hover:border-gray-200 transition">
+                <div class="flex items-center gap-4"><div class="p-2 bg-pink-100 rounded-xl"><i data-lucide="instagram" class="text-pink-600"></i></div><span class="font-bold text-gray-700">@${data.instagram}</span></div>
                 <i data-lucide="chevron-right" size="18" class="text-gray-400"></i>
             </a>
-            <a href="https://www.facebook.com/${data.facebook}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 hover:bg-gray-100 transition border border-transparent hover:border-gray-200">
-                <div class="flex items-center gap-4">
-                    <div class="p-2 bg-blue-100 rounded-xl"><i data-lucide="facebook" class="text-blue-600" size="20"></i></div>
-                    <span class="font-bold text-gray-700">PromoTV ${country}</span>
-                </div>
-                <i data-lucide="chevron-right" size="18" class="text-gray-400"></i>
-            </a>
-            <a href="https://${data.web}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 hover:bg-gray-100 transition border border-transparent hover:border-gray-200">
-                <div class="flex items-center gap-4">
-                    <div class="p-2 bg-gray-200 rounded-xl"><i data-lucide="globe" class="text-gray-700" size="20"></i></div>
-                    <span class="font-bold text-gray-700">Nuestro Sitio Web</span>
-                </div>
+            <a href="https://facebook.com/${data.facebook}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-transparent hover:border-gray-200 transition">
+                <div class="flex items-center gap-4"><div class="p-2 bg-blue-100 rounded-xl"><i data-lucide="facebook" class="text-blue-600"></i></div><span class="font-bold text-gray-700">Facebook</span></div>
                 <i data-lucide="chevron-right" size="18" class="text-gray-400"></i>
             </a>
         `;
@@ -226,7 +211,7 @@
         renderAll();
     });
 
-    window.onload = () => { renderAll(); lucide.createIcons(); };
+    window.onload = () => { renderAll(); updateUI(); lucide.createIcons(); };
 </script>
 </body>
 </html>
