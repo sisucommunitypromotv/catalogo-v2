@@ -129,32 +129,33 @@
     };
     // --- CATÁLOGO DE PRODUCTOS (Mantener igual) ---
     const catalogosPorPais = {
-        "Ecuador": [
-            { 
-                name: 'Combo MegaHome EC', 
-                category: 'Hogar', 
-                image: 'https://lh3.googleusercontent.com/u/0/d/1tBl1qsE6_x2UuVOJV7XymCjQBXyRWwme', 
-                benefits: ['Acero Quirúrgico 100 piezas', 'Apto para todo tipo de cocina', 'Resistente y duradero'] 
-            },
-            { 
-                name: 'Olla Pro EC', 
-                category: 'Cocina', 
-                image: 'https://lh3.googleusercontent.com/u/0/d/1foaVHCFi-Ff9Z3MalUXkKa1y722nyIRW', 
-                benefits: ['8L de gran capacidad', '3 válvulas de seguridad', 'Cocción ultra rápida'] 
-            },
-            { 
-                name: 'Set de 12 Piezas EC', 
-                category: 'Cocina', 
-                image: 'https://lh3.googleusercontent.com/u/0/d/1jeTVhtMN7GAX2MhDKaOKDJErM0SHsELz', 
-                benefits: ['8L de gran capacidad', '3 válvulas de seguridad', 'Cocción ultra rápida'] 
-                     },
-            { 
-                name: 'Set de 21 Piezas', 
-                category: 'Cocina', 
-                image: 'https://lh3.googleusercontent.com/u/0/d/1GMHR_21cGfl-UGwanWGAIbxsfk3ynzab', 
-                benefits: ['8L de gran capacidad', '3 válvulas de seguridad', 'Cocción ultra rápida'] 
-        ]
-    };
+  "Ecuador": [
+    { 
+      name: 'Combo MegaHome EC', 
+      category: 'Hogar', 
+      image: 'https://lh3.googleusercontent.com/u/0/d/1tBl1qsE6_x2UuVOJV7XymCjQBXyRWwme', 
+      benefits: ['Acero Quirúrgico 100 piezas', 'Apto para todo tipo de cocina', 'Resistente y duradero'] 
+    },
+    { 
+      name: 'Olla Pro EC', 
+      category: 'Cocina', 
+      image: 'https://lh3.googleusercontent.com/u/0/d/1foaVHCFi-Ff9Z3MalUXkKa1y722nyIRW', 
+      benefits: ['8L de gran capacidad', '3 válvulas de seguridad', 'Cocción ultra rápida'] 
+    },
+    { 
+      name: 'Set de 12 Piezas EC', 
+      category: 'Cocina', 
+      image: 'https://lh3.googleusercontent.com/u/0/d/1jeTVhtMN7GAX2MhDKaOKDJErM0SHsELz', 
+      benefits: ['8L de gran capacidad', '3 válvulas de seguridad', 'Cocción ultra rápida'] 
+    },
+    { 
+      name: 'Set de 21 Piezas', 
+      category: 'Cocina', 
+      image: 'https://lh3.googleusercontent.com/u/0/d/1GMHR_21cGfl-UGwanWGAIbxsfk3ynzab', 
+      benefits: ['8L de gran capacidad', '3 válvulas de seguridad', 'Cocción ultra rápida'] 
+    }
+  ]
+};
     let currentPage = 1;
     function renderAll() {
         const country = document.getElementById('countrySelect').value;
