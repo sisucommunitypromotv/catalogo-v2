@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo PromoTV - Características</title>
+    <title>Catálogo PromoTV - Internacional</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -11,19 +11,22 @@
         body { font-family: 'Poppins', sans-serif; background-color: #f3f4f6; }
         .page-container { width: min(95vw, 450px); height: min(150vw, 750px); border-radius: 30px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); overflow: hidden; position: relative; background: white; }
         .page { display: none; height: 100%; flex-direction: column; }
-        .active-page { display: flex; }
+        .active-page { display: flex !important; }
         .bg-primary { background-color: #0f2f76; }
         .text-primary { color: #0f2f76; }
         .bg-secondary { background-color: #feac1f; }
-        .text-secondary { color: #feac1f; }
     </style>
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen py-8">
 
     <div class="fixed bottom-6 z-50 flex items-center gap-4 bg-white p-3 rounded-full shadow-2xl border border-gray-100">
-        <button onclick="prevPage()" class="p-2 rounded-full hover:bg-gray-100 text-primary"><i data-lucide="chevron-left"></i></button>
-        <span id="pageIndicator" class="font-bold text-sm text-primary px-2">Página 1 de 3</span>
-        <button onclick="nextPage()" class="p-2 rounded-full hover:bg-gray-100 text-primary"><i data-lucide="chevron-right"></i></button>
+        <button onclick="prevPage()" class="p-2 rounded-full hover:bg-gray-100 text-primary">
+            <i data-lucide="chevron-left" style="width: 24px; height: 24px;"></i>
+        </button>
+        <span id="pageIndicator" class="font-bold text-sm text-primary px-2 min-w-[100px] text-center">Página 1 de 3</span>
+        <button onclick="nextPage()" class="p-2 rounded-full hover:bg-gray-100 text-primary">
+            <i data-lucide="chevron-right" style="width: 24px; height: 24px;"></i>
+        </button>
     </div>
 
     <div class="page-container" id="catalogContainer">
@@ -39,8 +42,13 @@
                 </div>
             </div>
             <div class="flex-1 flex flex-col justify-center px-10 bg-white">
+                <div id="countryLogoArea" class="mb-4 h-16 flex items-start">
+                    <img id="countryProfileImg" src="" alt="Logo País" class="h-full w-auto object-contain hidden">
+                </div>
+
                 <h2 class="text-4xl font-bold leading-tight mb-4 text-black uppercase">Catálogo de <br><span class="text-primary">Productos</span></h2>
                 <div class="w-16 h-2 mb-6 bg-secondary"></div>
+                
                 <div class="flex flex-col gap-2">
                     <span class="text-[10px] uppercase font-bold text-gray-400 italic">Selecciona tu país:</span>
                     <select id="countrySelect" class="w-full bg-gray-100 p-4 rounded-2xl font-bold text-primary appearance-none outline-none cursor-pointer">
@@ -61,7 +69,7 @@
             <div class="flex justify-between items-center mb-6">
                 <div>
                     <h3 class="text-2xl font-bold text-primary">Tendencias</h3>
-                    <p id="selectedCountryLabel" class="text-base text-gray-500 italic">Selección del mes en Ecuador</p>
+                    <p id="selectedCountryLabel" class="text-base text-gray-500 italic">Selección en Ecuador</p>
                 </div>
                 <i data-lucide="layout-grid" class="text-secondary"></i>
             </div>
@@ -75,79 +83,38 @@
                     <i data-lucide="message-circle" size="32"></i>
                 </div>
                 <h3 class="text-3xl font-bold mb-2 text-primary">¡Contáctanos!</h3>
-                <p id="contactCountryText" class="text-gray-500 text-sm mb-8 italic">Atención inmediata para Ecuador</p>
+                <p id="contactCountryText" class="text-gray-500 text-sm mb-8 italic">Atención para Ecuador</p>
                 <div id="socialLinksContainer" class="w-full space-y-4"></div>
             </div>
             <div class="p-8 flex flex-col items-center bg-primary">
-                <div class="bg-white px-4 py-2 rounded-xl mb-4">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1HChOqAbmrJrIhgbDm6j4VfwdrDOAsdk1" alt="Logo" class="h-8 w-auto">
-                </div>
-                <p class="text-white text-[10px] opacity-70">© 2026 PromoTV Corp. Todos los derechos reservados.</p>
+                <div class="bg-white px-4 py-2 rounded-xl mb-4"><img src="https://lh3.googleusercontent.com/u/0/d/1HChOqAbmrJrIhgbDm6j4VfwdrDOAsdk1" class="h-8 w-auto"></div>
+                <p class="text-white text-[10px] opacity-70">© 2026 PromoTV Corp.</p>
             </div>
         </div>
     </div>
+
 <script>
-    // --- DATOS COMPLETOS POR PAÍS (Configura aquí tus redes) ---
-    const socialData = {
-        "Ecuador": { 
-            whatsapp: "593998469249", 
-            instagram: "promotvecoficial",
-            facebook: "promotvecoficial", // Nombre de la página
-            web: "www.promotvcorp.com"
-        },
-        "Perú": { 
-            whatsapp: "51900000000", 
-            instagram: "promotvperu",
-            facebook: "promotvperu",
-            web: "pe.promotvcorp.com"
-        },
-        "Colombia": { 
-            whatsapp: "573000000000", 
-            instagram: "promotvcol",
-            facebook: "promotvcol",
-            web: "co.promotvcorp.com"
-        },
-        "Bolivia": { 
-            whatsapp: "59100000000", 
-            instagram: "promotvbo",
-            facebook: "promotvbo",
-            web: "bo.promotvcorp.com"
-        },
-        "Panamá": { 
-            whatsapp: "5070000000", 
-            instagram: "promotvpa",
-            facebook: "promotvpa",
-            web: "pa.promotvcorp.com"
-        },
-        "Argentina": { 
-            whatsapp: "540000000000", 
-            instagram: "promotvar",
-            facebook: "promotvar",
-            web: "ar.promotvcorp.com"
-        },
-        "México": { 
-            whatsapp: "520000000000", 
-            instagram: "promotvmx",
-            facebook: "promotvmx",
-            web: "mx.promotvcorp.com"
-        }
+    // CONFIGURA AQUÍ TUS LOGOS (Asegúrate de poner la URL entre comillas)
+    const logosPorPais = {
+        "Ecuador": "https://via.placeholder.com/150x50?text=Logo+EC",
+        "Perú": "https://via.placeholder.com/150x50?text=Logo+PE",
+        "Colombia": "https://via.placeholder.com/150x50?text=Logo+CO"
     };
 
-    // --- CATÁLOGO DE PRODUCTOS (Mantener igual) ---
+    const socialData = {
+        "Ecuador": { whatsapp: "593998469249", instagram: "promotvecoficial", facebook: "promotvecoficial", web: "www.promotvcorp.com" },
+        "Perú": { whatsapp: "51900000000", instagram: "promotvperu", facebook: "promotvperu", web: "pe.promotvcorp.com" },
+        "Colombia": { whatsapp: "573000000000", instagram: "promotvcol", facebook: "promotvcol", web: "co.promotvcorp.com" },
+        "Bolivia": { whatsapp: "59100000000", instagram: "promotvbo", facebook: "promotvbo", web: "bo.promotvcorp.com" },
+        "Panamá": { whatsapp: "5070000000", instagram: "promotvpa", facebook: "promotvpa", web: "pa.promotvcorp.com" },
+        "Argentina": { whatsapp: "540000000000", instagram: "promotvar", facebook: "promotvar", web: "ar.promotvcorp.com" },
+        "México": { whatsapp: "520000000000", instagram: "promotvmx", facebook: "promotvmx", web: "mx.promotvcorp.com" }
+    };
+
     const catalogosPorPais = {
         "Ecuador": [
-            { 
-                name: 'Combo MegaHome EC', 
-                category: 'Hogar', 
-                image: 'https://lh3.googleusercontent.com/u/0/d/1tBl1qsE6_x2UuVOJV7XymCjQBXyRWwme', 
-                benefits: ['Acero Quirúrgico 100 piezas', 'Apto para todo tipo de cocina', 'Resistente y duradero'] 
-            },
-            { 
-                name: 'Olla Pro EC', 
-                category: 'Cocina', 
-                image: 'https://lh3.googleusercontent.com/u/0/d/1foaVHCFi-Ff9Z3MalUXkKa1y722nyIRW', 
-                benefits: ['8L de gran capacidad', '3 válvulas de seguridad', 'Cocción ultra rápida'] 
-            }
+            { name: 'Combo MegaHome EC', category: 'Hogar', image: 'https://lh3.googleusercontent.com/u/0/d/1tBl1qsE6_x2UuVOJV7XymCjQBXyRWwme', ', benefits: ['Acero Quirúrgico 100 piezas', 'Resistente'] },
+            { name: 'Olla Pro EC', category: 'Cocina', image: 'https://lh3.googleusercontent.com/u/0/d/1foaVHCFi-Ff9Z3MalUXkKa1y722nyIRW', ', benefits: ['8L de capacidad', 'Válvula seguridad'] }
         ]
     };
 
@@ -157,94 +124,59 @@
         const country = document.getElementById('countrySelect').value;
         const data = socialData[country] || socialData["Ecuador"];
         
-        // 1. Renderizar Productos (Página 2)
+        // Actualizar Logo País
+        const profileImg = document.getElementById('countryProfileImg');
+        if(logosPorPais[country]) {
+            profileImg.src = logosPorPais[country];
+            profileImg.classList.remove('hidden');
+        } else {
+            profileImg.classList.add('hidden');
+        }
+
+        // Renderizar Productos
         const grid = document.getElementById('productsGrid');
         const productos = catalogosPorPais[country] || catalogosPorPais["Ecuador"];
-        
         grid.innerHTML = productos.map(p => {
-            const waMessage = encodeURIComponent(`Hola PromoTV ${country}, quiero más información de este producto: ${p.name}`);
-            const waLink = `https://wa.me/${data.whatsapp}?text=${waMessage}`;
-
+            const waLink = `https://wa.me/${data.whatsapp}?text=Hola, info de ${p.name}`;
             return `
-            <div class="flex flex-col gap-4 p-6 rounded-[30px] bg-white border border-gray-100 shadow-sm">
+            <div class="flex flex-col gap-4 p-5 rounded-[25px] bg-white border border-gray-100 shadow-sm">
                 <div class="flex gap-4">
-                    <div class="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0">
-                        <img src="${p.image}" class="w-full h-full object-cover">
-                    </div>
+                    <div class="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0"><img src="${p.image}" class="w-full h-full object-cover"></div>
                     <div class="flex flex-col flex-1">
-                        <span class="text-[15px] font-bold text-secondary uppercase tracking-wide mb-1">${p.category}</span>
-                        <h4 class="font-bold text-xl text-primary leading-tight mb-2 uppercase">${p.name}</h4>
+                        <span class="text-[10px] font-bold text-secondary uppercase mb-1">${p.category}</span>
+                        <h4 class="font-bold text-lg text-primary uppercase">${p.name}</h4>
                         <ul class="space-y-1">
-                            ${p.benefits.map(b => `<li class="text-[13px] text-gray-500 flex items-center gap-2 font-medium"><i data-lucide="check-circle-2" class="text-secondary" size="12"></i> ${b}</li>`).join('')}
+                            ${p.benefits.map(b => `<li class="text-[11px] text-gray-500 flex items-center gap-1"><i data-lucide="check-circle" size="10"></i> ${b}</li>`).join('')}
                         </ul>
                     </div>
                 </div>
-                <div class="flex justify-center mt-2">
-                    <a href="${waLink}" target="_blank" class="w-64 py-1 rounded-full bg-primary text-white text-lg font-bold flex items-center justify-center gap-3 hover:scale-105 transition-transform uppercase tracking-widest shadow-lg">
-                        Pedir <i data-lucide="send" size="15"></i>
-                    </a>
-                </div>
-            </div>
-            `;
+                <div class="flex justify-center"><a href="${waLink}" target="_blank" class="w-48 py-2 rounded-full bg-primary text-white text-base font-bold text-center uppercase shadow-md">Pedir</a></div>
+            </div>`;
         }).join('');
 
-        // 2. Renderizar PÁGINA DE CONTACTO COMPLETA (Página 3)
-        document.getElementById('contactCountryText').innerText = `Estamos listos para procesar tu pedido en ${country}`;
-        const container = document.getElementById('socialLinksContainer');
+        // Redes Sociales
+        document.getElementById('contactCountryText').innerText = `Atención para ${country}`;
+        document.getElementById('socialLinksContainer').innerHTML = `
+            <a href="https://wa.me/${data.whatsapp}" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-transparent hover:border-gray-200 transition">
+                <div class="flex items-center gap-4"><div class="p-2 bg-green-100 rounded-xl"><i data-lucide="phone" class="text-green-600"></i></div><span class="font-bold">WhatsApp</span></div>
+                <i data-lucide="chevron-right"></i>
+            </a>`;
         
-        // Aquí generamos todos los botones como en la imagen que subiste
-        container.innerHTML = `
-            <a href="https://wa.me/${data.whatsapp}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 hover:bg-gray-100 transition border border-transparent hover:border-gray-200">
-                <div class="flex items-center gap-4">
-                    <div class="p-2 bg-green-100 rounded-xl"><i data-lucide="phone" class="text-green-600" size="20"></i></div>
-                    <span class="font-bold text-gray-700">WhatsApp Ventas</span>
-                </div>
-                <i data-lucide="chevron-right" size="18" class="text-gray-400"></i>
-            </a>
-
-            <a href="https://www.instagram.com/${data.instagram}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 hover:bg-gray-100 transition border border-transparent hover:border-gray-200">
-                <div class="flex items-center gap-4">
-                    <div class="p-2 bg-pink-100 rounded-xl"><i data-lucide="instagram" class="text-pink-600" size="20"></i></div>
-                    <span class="font-bold text-gray-700">@${data.instagram}</span>
-                </div>
-                <i data-lucide="chevron-right" size="18" class="text-gray-400"></i>
-            </a>
-
-            <a href="https://www.facebook.com/${data.facebook}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 hover:bg-gray-100 transition border border-transparent hover:border-gray-200">
-                <div class="flex items-center gap-4">
-                    <div class="p-2 bg-blue-100 rounded-xl"><i data-lucide="facebook" class="text-blue-600" size="20"></i></div>
-                    <span class="font-bold text-gray-700">PromoTV ${country}</span>
-                </div>
-                <i data-lucide="chevron-right" size="18" class="text-gray-400"></i>
-            </a>
-
-            <a href="https://${data.web}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 hover:bg-gray-100 transition border border-transparent hover:border-gray-200">
-                <div class="flex items-center gap-4">
-                    <div class="p-2 bg-gray-200 rounded-xl"><i data-lucide="globe" class="text-gray-700" size="20"></i></div>
-                    <span class="font-bold text-gray-700">Nuestro Sitio Web</span>
-                </div>
-                <i data-lucide="chevron-right" size="18" class="text-gray-400"></i>
-            </a>
-        `;
-        
-        lucide.createIcons(); // Vital para que se vean los iconos nuevos
+        lucide.createIcons();
     }
 
     function updateUI() {
-        document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active-page', (i+1) === currentPage));
+        document.querySelectorAll('.page').forEach((p, i) => {
+            p.style.display = (i + 1 === currentPage) ? 'flex' : 'none';
+        });
         document.getElementById('pageIndicator').innerText = `Página ${currentPage} de 3`;
-        document.getElementById('catalogContainer').scrollTo({top: 0, behavior: 'smooth'});
     }
 
     function nextPage() { if(currentPage < 3) { currentPage++; updateUI(); } }
     function prevPage() { if(currentPage > 1) { currentPage--; updateUI(); } }
 
-    document.getElementById('countrySelect').addEventListener('change', (e) => {
-        document.getElementById('selectedCountryLabel').innerText = `Selección del mes en ${e.target.value}`;
-        renderAll();
-    });
-
-    window.onload = () => { renderAll(); lucide.createIcons(); };
+    document.getElementById('countrySelect').addEventListener('change', renderAll);
+    window.onload = () => { renderAll(); updateUI(); lucide.createIcons(); };
 </script>
 </body>
 </html>
