@@ -21,9 +21,13 @@
 <body class="flex flex-col items-center justify-center min-h-screen py-8">
 
     <div class="fixed bottom-6 z-50 flex items-center gap-4 bg-white p-3 rounded-full shadow-2xl border border-gray-100">
-        <button onclick="prevPage()" class="p-2 rounded-full hover:bg-gray-100 text-primary"><i data-lucide="chevron-left"></i></button>
+        <button onclick="prevPage()" class="p-2 rounded-full hover:bg-gray-100 text-primary">
+            <i data-lucide="chevron-left"></i>
+        </button>
         <span id="pageIndicator" class="font-bold text-sm text-primary px-2">Página 1 de 3</span>
-        <button onclick="nextPage()" class="p-2 rounded-full hover:bg-gray-100 text-primary"><i data-lucide="chevron-right"></i></button>
+        <button onclick="nextPage()" class="p-2 rounded-full hover:bg-gray-100 text-primary">
+            <i data-lucide="chevron-right"></i>
+        </button>
     </div>
 
     <div class="page-container" id="catalogContainer">
@@ -38,13 +42,12 @@
                     </div>
                 </div>
             </div>
-            
             <div class="flex-1 flex flex-col justify-center px-10 bg-white">
                 <div id="countryLogoContainer" class="mb-4 h-16 flex items-start">
                     <img id="countryProfileImg" src="" alt="Logo País" class="h-full w-auto object-contain hidden">
                 </div>
 
-                <h2 class="text-4xl font-bold leading-tight mb-4 text-black uppercase">Catálogo de <br><span class="text-primary">Productos</span></h2>
+                <h2 class="text-4xl font-bold leading-tight mb-4 text-black uppercase tracking-tight">Catálogo de <br><span class="text-primary">Productos</span></h2>
                 <div class="w-16 h-2 mb-6 bg-secondary"></div>
                 <div class="flex flex-col gap-2">
                     <span class="text-[10px] uppercase font-bold text-gray-400 italic">Selecciona tu país:</span>
@@ -71,7 +74,7 @@
                 <i data-lucide="layout-grid" class="text-secondary"></i>
             </div>
             <div class="grid grid-cols-1 gap-6" id="productsGrid"></div>
-            <div class="mt-8 p-4 rounded-3xl text-center bg-secondary mb-4 text-white text-sm font-bold uppercase tracking-wide">Paga al recibir en casa</div>
+            <div class="mt-8 p-4 rounded-3xl text-center bg-secondary mb-4 text-white text-sm font-bold uppercase tracking-widest">Paga al recibir en casa</div>
         </div>
 
         <div id="page3" class="page flex flex-col">
@@ -93,15 +96,15 @@
     </div>
 
 <script>
-    // --- NUEVO: IMÁGENES DE LOGO POR PAÍS ---
+    // --- IMÁGENES DE LOGO POR PAÍS ---
     const countryLogos = {
-        "Ecuador": "URL_DE_TU_IMAGEN_ECUADOR.png",
-        "Perú": "URL_DE_TU_IMAGEN_PERU.png",
-        "Colombia": "URL_DE_TU_IMAGEN_COLOMBIA.png",
-        "Bolivia": "URL_DE_TU_IMAGEN_BOLIVIA.png",
-        "Panamá": "URL_DE_TU_IMAGEN_PANAMA.png",
-        "Argentina": "URL_DE_TU_IMAGEN_ARGENTINA.png",
-        "México": "URL_DE_TU_IMAGEN_MEXICO.png"
+        "Ecuador": "TU_URL_AQUÍ",
+        "Perú": "TU_URL_AQUÍ",
+        "Colombia": "TU_URL_AQUÍ",
+        "Bolivia": "TU_URL_AQUÍ",
+        "Panamá": "TU_URL_AQUÍ",
+        "Argentina": "TU_URL_AQUÍ",
+        "México": "TU_URL_AQUÍ"
     };
 
     const socialData = {
@@ -127,76 +130,59 @@
         const country = document.getElementById('countrySelect').value;
         const data = socialData[country] || socialData["Ecuador"];
         
-        // --- ACTUALIZAR LOGO DINÁMICO ---
+        // Actualizar Logo
         const logoImg = document.getElementById('countryProfileImg');
-        if (countryLogos[country]) {
+        if (countryLogos[country] && countryLogos[country] !== "TU_URL_AQUÍ") {
             logoImg.src = countryLogos[country];
             logoImg.classList.remove('hidden');
         } else {
             logoImg.classList.add('hidden');
         }
 
-        // 1. Renderizar Productos
+        // Renderizar Productos
         const grid = document.getElementById('productsGrid');
         const productos = catalogosPorPais[country] || catalogosPorPais["Ecuador"];
         
         grid.innerHTML = productos.map(p => {
-            const waMessage = encodeURIComponent(`Hola PromoTV ${country}, quiero más información de este producto: ${p.name}`);
+            const waMessage = encodeURIComponent(`Hola PromoTV ${country}, quiero más información de: ${p.name}`);
             const waLink = `https://wa.me/${data.whatsapp}?text=${waMessage}`;
             return `
-            <div class="flex flex-col gap-4 p-6 rounded-[30px] bg-white border border-gray-100 shadow-sm">
+            <div class="flex flex-col gap-4 p-5 rounded-[25px] bg-white border border-gray-100 shadow-sm">
                 <div class="flex gap-4">
-                    <div class="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0">
-                        <img src="${p.image}" class="w-full h-full object-cover">
-                    </div>
+                    <div class="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0"><img src="${p.image}" class="w-full h-full object-cover"></div>
                     <div class="flex flex-col flex-1">
-                        <span class="text-[15px] font-bold text-secondary uppercase tracking-wide mb-1">${p.category}</span>
-                        <h4 class="font-bold text-xl text-primary leading-tight mb-2 uppercase">${p.name}</h4>
+                        <span class="text-[10px] font-bold text-secondary uppercase tracking-widest mb-1">${p.category}</span>
+                        <h4 class="font-bold text-lg text-primary leading-tight mb-2 uppercase tracking-tight">${p.name}</h4>
                         <ul class="space-y-1">
-                            ${p.benefits.map(b => `<li class="text-[13px] text-gray-500 flex items-center gap-2 font-medium"><i data-lucide="check-circle-2" class="text-secondary" size="12"></i> ${b}</li>`).join('')}
+                            ${p.benefits.map(b => `<li class="text-[11px] text-gray-500 flex items-center gap-2 font-medium"><i data-lucide="check-circle-2" class="text-secondary" size="10"></i> ${b}</li>`).join('')}
                         </ul>
                     </div>
                 </div>
-                <div class="flex justify-center mt-2">
-                    <a href="${waLink}" target="_blank" class="w-64 py-2 rounded-full bg-primary text-white text-lg font-bold flex items-center justify-center gap-3 hover:scale-105 transition-transform uppercase tracking-widest shadow-lg">
+                <div class="flex justify-center mt-1">
+                    <a href="${waLink}" target="_blank" class="w-48 py-2 rounded-full bg-primary text-white text-base font-bold flex items-center justify-center gap-2 hover:scale-105 transition-transform uppercase tracking-wider shadow-md">
                         Pedir <i data-lucide="send" size="15"></i>
                     </a>
                 </div>
             </div>`;
         }).join('');
 
-        // 2. Renderizar Contacto
-        document.getElementById('contactCountryText').innerText = `Estamos listos para procesar tu pedido en ${country}`;
+        // Renderizar Redes Sociales
+        document.getElementById('contactCountryText').innerText = `Atención inmediata para ${country}`;
         const container = document.getElementById('socialLinksContainer');
         container.innerHTML = `
-            <a href="https://wa.me/${data.whatsapp}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 hover:bg-gray-100 transition border border-transparent hover:border-gray-200">
-                <div class="flex items-center gap-4">
-                    <div class="p-2 bg-green-100 rounded-xl"><i data-lucide="phone" class="text-green-600" size="20"></i></div>
-                    <span class="font-bold text-gray-700">WhatsApp Ventas</span>
-                </div>
+            <a href="https://wa.me/${data.whatsapp}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-transparent hover:border-gray-200 transition">
+                <div class="flex items-center gap-4"><div class="p-2 bg-green-100 rounded-xl"><i data-lucide="phone" class="text-green-600" size="20"></i></div><span class="font-bold text-gray-700">WhatsApp Ventas</span></div>
                 <i data-lucide="chevron-right" size="18" class="text-gray-400"></i>
             </a>
-            <a href="https://www.instagram.com/${data.instagram}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 hover:bg-gray-100 transition border border-transparent hover:border-gray-200">
-                <div class="flex items-center gap-4">
-                    <div class="p-2 bg-pink-100 rounded-xl"><i data-lucide="instagram" class="text-pink-600" size="20"></i></div>
-                    <span class="font-bold text-gray-700">@${data.instagram}</span>
-                </div>
+            <a href="https://instagram.com/${data.instagram}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-transparent hover:border-gray-200 transition">
+                <div class="flex items-center gap-4"><div class="p-2 bg-pink-100 rounded-xl"><i data-lucide="instagram" class="text-pink-600" size="20"></i></div><span class="font-bold text-gray-700">@${data.instagram}</span></div>
                 <i data-lucide="chevron-right" size="18" class="text-gray-400"></i>
             </a>
-            <a href="https://www.facebook.com/${data.facebook}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 hover:bg-gray-100 transition border border-transparent hover:border-gray-200">
-                <div class="flex items-center gap-4">
-                    <div class="p-2 bg-blue-100 rounded-xl"><i data-lucide="facebook" class="text-blue-600" size="20"></i></div>
-                    <span class="font-bold text-gray-700">PromoTV ${country}</span>
-                </div>
+            <a href="https://facebook.com/${data.facebook}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-transparent hover:border-gray-200 transition">
+                <div class="flex items-center gap-4"><div class="p-2 bg-blue-100 rounded-xl"><i data-lucide="facebook" class="text-blue-600" size="20"></i></div><span class="font-bold text-gray-700">PromoTV ${country}</span></div>
                 <i data-lucide="chevron-right" size="18" class="text-gray-400"></i>
             </a>
-            <a href="https://${data.web}" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-gray-50 hover:bg-gray-100 transition border border-transparent hover:border-gray-200">
-                <div class="flex items-center gap-4">
-                    <div class="p-2 bg-gray-200 rounded-xl"><i data-lucide="globe" class="text-gray-700" size="20"></i></div>
-                    <span class="font-bold text-gray-700">Nuestro Sitio Web</span>
-                </div>
-                <i data-lucide="chevron-right" size="18" class="text-gray-400"></i>
-            </a>`;
+        `;
         lucide.createIcons();
     }
 
